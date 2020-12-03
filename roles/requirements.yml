@@ -1,0 +1,21 @@
+---
+roles:
+  - src: ssh://git@code.tatar.ru:7999/platform/ansible-role-docker.git
+    name: ansible-role-docker
+    scm: git
+    version: master
+
+  - src: ssh://git@code.tatar.ru:7999/platform/ansible-role-openjdk.git
+    name: ansible-role-openjdk
+    scm: git
+    version: master
+
+  - src: ssh://git@code.tatar.ru:7999/platform/ansible-role-git.git
+    name: ansible-role-git
+    scm: git
+    version: master
+
+  - src: ssh://git@code.tatar.ru:7999/platform/ansible-role-jenkins_swarm_agent.git
+    name: ansible-role-jenkins_swarm_agent
+    scm: git
+    version: master

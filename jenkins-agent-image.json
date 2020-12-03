@@ -1,0 +1,60 @@
+{
+  "builders": [
+    {
+      "name": "yandex",
+      "type": "yandex",
+      "ssh_username": "cloud-user",
+      "ssh_timeout": "20m",
+
+      "source_image_folder_id": "{{user `source_image_folder_id`}}",
+      "source_image_family": "{{user `source_image_family`}}",
+
+      "zone": "{{user `zone`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+
+      "instance_name": "{{user `instance_name`}}",
+      "instance_cores": "{{user `instance_cores`}}",
+      "instance_mem_gb": "{{user `instance_mem_gb`}}",
+      "disk_type": "network-hdd",
+      "disk_size_gb": "{{user `disk_size_gb`}}",
+      "use_ipv4_nat": "true",
+
+      "image_family": "centos-8-jenkins-agent",
+      "image_name": "centos-8-jenkins-agent-image-{{isotime | clean_resource_name}}",
+      "image_description": "Jenkins Agent Image"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./playbook.yml",
+      "roles_path": "./roles",
+      "galaxy_file": "./roles/requirements.yml",
+      "ansible_env_vars": [ "ANSIBLE_CONFIG=./ansible.cfg" ]
+    }
+  ],
+
+"post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true,
+      "custom_data": {
+        "source_image_id": "{{ build `SourceImageID` }}"
+      }
+    }
+],
+
+  "variables": {
+    "source_image_folder_id": "b1gk6m11jdpeg9768aol",
+    "source_image_family": "centos-8-dtc-base",
+    "zone": "ru-central1-a",
+    "folder_id": "b1gk6m11jdpeg9768aol",
+    "subnet_id": "e9b5q3c33jv292vb82lk",
+    "instance_cores": "2",
+    "instance_mem_gb": "4",
+    "disk_size_gb": "10"
+  }
+}
