@@ -20,9 +20,9 @@
       "disk_size_gb": "{{user `disk_size_gb`}}",
       "use_ipv4_nat": "true",
 
-      "image_family": "centos-8-jenkins-agent",
-      "image_name": "centos-8-jenkins-agent-image-{{isotime | clean_resource_name}}",
-      "image_description": "Jenkins Agent Image"
+      "image_family": "centos-8-jira",
+      "image_name": "centos-8-jira-image-{{isotime | clean_resource_name}}",
+      "image_description": "JIRA DC Image"
     }
   ],
 
@@ -53,7 +53,7 @@
     "zone": "ru-central1-a",
     "folder_id": "b1gk6m11jdpeg9768aol",
     "subnet_id": "e9b5q3c33jv292vb82lk",
-    "instance_cores": "2",
+    "instance_cores": "4",
     "instance_mem_gb": "4",
     "disk_size_gb": "10"
   }

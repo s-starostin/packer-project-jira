@@ -27,19 +27,10 @@ pipeline {
             stages {
                 stage('Packer build image') {
                   steps {
-                      withVault(vaultSecrets:
-                          [[path: 'secret/_common/jenkins_master',
-                              secretValues: [
-                                  [envVar: 'JENKINS_USERNAME', vaultKey: 'username'],
-                                  [envVar: 'JENKINS_PASSWORD', vaultKey: 'password']
-                              ]
-                          ]]
-                      ){
-                        sshagent(['git-bitbucket-private']) {
+                      sshagent(['git-bitbucket-private']) {
                           sh "env"
                           sh "GIT_SSH_COMMAND=\"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no\" \
-                              packer build jenkins-agent-image.json"
-                        }
+                              packer build jira-image.json"
                       }
                   }
                 }

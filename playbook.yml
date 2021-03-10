@@ -1,15 +1,5 @@
 ---
 - hosts: all
   become: true
-  vars:
-    jenkins_agent_master_host: platform-1-jenkins-1.devops.platform.tatar.ru
-    jenkins_agent_master_port: 8090
-    jenkins_agent_master_username: "{{ lookup('env','JENKINS_USERNAME') }}"
-    jenkins_agent_master_password: "{{ lookup('env','JENKINS_PASSWORD') }}"
-    docker_users:
-      - jenkins
   roles:
-    - ansible-role-docker
-    - ansible-role-openjdk
-    - ansible-role-git
-    - ansible-role-jenkins_swarm_agent
+    - ansible-role-grafana
