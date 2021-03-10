@@ -1,5 +1,9 @@
 ---
 - hosts: all
   become: true
+  vars:
+    grafana_security:
+      admin_user: admin
+      admin_password: admin
   roles:
     - ansible-role-grafana
