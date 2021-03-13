@@ -32,6 +32,7 @@
       "playbook_file": "{{ user `ansible_dir` }}/playbook.yml",
       "ansible_env_vars": [ "JIRA_SHARED_HOME={{ user `jira_shared_home` }}" ],
       "roles_path": "{{ user `ansible_dir` }}/roles",
+      "collections_path": "{{ user `ansible_dir` }}/collections",
       "empty_groups": "consul-server"
     },
 
