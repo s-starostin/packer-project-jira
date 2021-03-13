@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  vars:
+      jira_database_password: AttAdminCdt
+      jira_database_port: 6432
+      jira_database_host: rc1a-ceey0dj4zien5mhh.mdb.yandexcloud.net
+      jira_install_datacenter: true
+      jira_datacenter_shared_home: "{{ lookup('env','JIRA_SHARED_HOME') }}"
+      jira_install_additional_actions: >-
+          mkdir -p ~/.postgresql &&
+          wget --no-check-certificate "https://storage.yandexcloud.net/cloud-certs/CA.pem" -O ~/.postgresql/root.crt &&
+          chmod 0600 ~/.postgresql/root.crt
+      openjdk_version: 1.8.0
+  pre_tasks:
+    - name: Mount an NFS volume
+      ansible.posix.mount:
+        src: nfs-1:/var/shared
+        path: /var/shared
+        opts: rw,nfsvers=3,lookupcache=pos,noatime,intr,rsize=32768,wsize=32768,_netdev
+        state: mounted
+        fstype: nfs
+  roles:
+    - ansible-role-openjdk
+    - ansible-role-jira

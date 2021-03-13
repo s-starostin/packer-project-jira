@@ -1,0 +1,12 @@
+---
+roles:
+  - src: https://github.com/s-starostin/ansible-role-openjdk.git
+    name: ansible-role-openjdk
+    scm: git
+    version: master
+  - src: https://github.com/s-starostin/ansible-role-jira.git
+    name: ansible-role-jira
+    scm: git
+    version: master
+collections:
+  - name: ansible.posix

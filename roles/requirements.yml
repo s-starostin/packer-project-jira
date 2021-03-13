@@ -1,6 +1,0 @@
----
-roles:
-  - src: ssh://git@code.tatar.ru:7999/platform/ansible-role-grafana.git
-    name: ansible-role-grafana
-    scm: git
-    version: master

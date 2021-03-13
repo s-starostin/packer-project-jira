@@ -29,10 +29,25 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "./playbook.yml",
-      "roles_path": "./roles",
-      "galaxy_file": "./roles/requirements.yml",
-      "ansible_env_vars": [ "ANSIBLE_CONFIG=./ansible.cfg" ]
+      "playbook_file": "{{ user `ansible_dir` }}/playbook.yml",
+      "ansible_env_vars": [ "JIRA_SHARED_HOME={{ user `jira_shared_home` }}" ],
+      "roles_path": "{{ user `ansible_dir` }}/roles",
+      "empty_groups": "consul-server"
+    },
+
+    {
+      "type": "shell",
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "environment_vars": [
+          "CONSUL_RETRY_JOIN={{ user `consul_retry_join` }}",
+          "CONSUL_CENTER={{ user `consul_center` }}",
+          "CONSUL_DOMAIN={{ user `consul_domain` }}",
+          "JIRA_SHARED_HOME={{ user `jira_shared_home` }}"
+      ],
+      "scripts": [
+        "{{ user `scripts_dir` }}/cloud-init.sh",
+        "{{ user `scripts_dir` }}/cleanup.sh"
+      ]
     }
   ],
 
@@ -55,6 +70,14 @@
     "subnet_id": "e9b5q3c33jv292vb82lk",
     "instance_cores": "4",
     "instance_mem_gb": "4",
-    "disk_size_gb": "10"
+    "disk_size_gb": "10",
+	"ansible_dir": "{{ template_dir }}/provisioners/ansible",
+    "scripts_dir": "{{ template_dir }}/provisioners/shell",
+
+    "jira_shared_home": "/var/shared",
+
+    "consul_retry_join": "consul-1",
+    "consul_center": "dtc",
+    "consul_domain": "consul"
   }
 }
