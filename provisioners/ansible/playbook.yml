@@ -13,6 +13,10 @@
           chmod 0600 ~/.postgresql/root.crt
       openjdk_version: 1.8.0
   pre_tasks:
+    - name: Install nfs-utils
+      dnf:
+        name: nfs-utils
+        state: installed
     - name: Mount an NFS volume
       ansible.posix.mount:
         src: nfs-1:/var/shared
