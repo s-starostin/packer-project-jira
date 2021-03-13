@@ -93,7 +93,7 @@ write_files:
       }
 
       retry_join = [`sed 's/[^,]*/"&"/g' <<< $CONSUL_RETRY_JOIN`]
-      center = "$CONSUL_CENTER"
+      datacenter = "$CONSUL_CENTER"
       domain = "$CONSUL_DOMAIN"
       EOF
 
